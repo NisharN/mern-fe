@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import axios from "axios";
 function App() {
+  const [fruit, setFruit] = useState("");
+  function handleFruit(event) {
+    setFruit(event.target.value);
+  }
+  function add() {
+    console.log(fruit);
+    var fruitAdd=axios.get("https://mern-be-k43h.onrender.com/?name="+fruit)
+    fruitAdd.then((response)=>{
+      console.log(response.data);
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <label>fruit:</label>
+        <input onChange={handleFruit} value={fruit} type="text" id="name" name="name" />
+        <br/>
+        <button onClick={add}>Submit</button>
+        </div>
+        
+
+        </div>
+
+
   );
 }
 
